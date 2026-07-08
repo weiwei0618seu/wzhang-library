@@ -1,0 +1,134 @@
+<template>
+  <main class="container mt-5">
+    <section class="row">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+        <h1 class="text-center mb-4">User Information Form / Credentials</h1>
+
+        <form class="bg-white border rounded shadow-sm p-4" @submit.prevent="submitForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              v-model="formData.username"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              v-model="formData.password"
+            />
+          </div>
+
+          <div class="mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="isAustralian"
+              name="isAustralian"
+              v-model="formData.isAustralian"
+            />
+            <label for="isAustralian" class="form-check-label">Australian Resident?</label>
+          </div>
+
+          <div class="mb-3">
+            <label for="reason" class="form-label">Reason For Joining:</label>
+            <textarea
+              class="form-control"
+              id="reason"
+              name="reason"
+              rows="3"
+              v-model="formData.reason"
+            ></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" v-model="formData.gender">
+              <option disabled value="">Please select one option</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary me-2">Submit</button>
+          <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="row mt-5" v-if="submittedCards.length">
+      <div class="d-flex flex-wrap justify-content-start">
+        <div
+          v-for="(card, index) in submittedCards"
+          :key="index"
+          class="card m-2 submitted-card"
+        >
+          <div class="card-header">User Information</div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Username: {{ card.username }}</li>
+            <li class="list-group-item">Password: {{ card.password }}</li>
+            <li class="list-group-item">
+              Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
+            </li>
+            <li class="list-group-item">Gender: {{ card.gender }}</li>
+            <li class="list-group-item">Reason: {{ card.reason }}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const initialFormData = {
+  username: '',
+  password: '',
+  isAustralian: false,
+  reason: '',
+  gender: '',
+}
+
+const formData = ref({ ...initialFormData })
+const submittedCards = ref([])
+
+const submitForm = () => {
+  submittedCards.value.push({
+    ...formData.value,
+  })
+}
+
+const clearForm = () => {
+  formData.value = { ...initialFormData }
+}
+</script>
+
+<style scoped>
+.submitted-card {
+  width: min(18rem, 100%);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #275fda;
+  color: white;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.list-group-item {
+  padding: 10px;
+}
+</style>
