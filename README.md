@@ -1,4 +1,4 @@
-# FIT5032 Lab 1
+# FIT5032 Lab 2 and Lab 3
 
 Student Name: Wei Zhang  
 Student ID: 36668699  
