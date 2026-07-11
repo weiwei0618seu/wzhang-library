@@ -1,6 +1,9 @@
-# wzhang-library
+# FIT5032 Lab 1
 
-This template should help get you started developing with Vue 3 in Vite.
+Student Name: Wei Zhang  
+Student ID: 36668699  
+
+This repository is used for the FIT5032 Lab 2 and Lab 3 submission.
 
 ## Recommended IDE Setup
 
